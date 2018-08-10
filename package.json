@@ -1,0 +1,9 @@
+{
+  "name": "interact-db",
+  "version": "0.0.1",
+  "description": "A graph database service to store interactions between users",
+  "main": "src/index.js",
+  "repository": "https://github.com/forevertz/interact-db",
+  "author": "Improvertz",
+  "license": "GPLv3"
+}
