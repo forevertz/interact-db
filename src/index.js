@@ -35,6 +35,10 @@ const endpoints = {
     '/user-interaction': {
       description: 'Add an Interaction between a User and another User',
       call: require('./endpoint/post-user-interaction')
+    },
+    '/content-interaction': {
+      description: 'Add an Interaction between a User and a Content',
+      call: require('./endpoint/post-content-interaction')
     }
   }
 }
