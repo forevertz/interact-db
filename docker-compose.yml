@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  neo4j:
+    image: neo4j:3.4.5
+    environment:
+      - NEO4J_AUTH=${NEO4J_AUTH-neo4j/CHANGEME}
+      - NEO4J_HOME=/var/lib/neo4j
+    volumes:
+      - dataVolume:/var/lib/neo4j/data
+      - dataVolume:/var/lib/neo4j/logs
+
+  interact-db:
+    build: .
+    ports:
+      - 127.0.0.1:3003:3000
+    links:
+      - neo4j
+
+volumes:
+  dataVolume: {}
