@@ -1,4 +1,4 @@
-module.exports = function parseQueryString(queryString) {
+function parseQueryString(queryString) {
   return queryString.split('&').reduce(
     (params, paramString) => ({
       ...params,
@@ -11,4 +11,13 @@ module.exports = function parseQueryString(queryString) {
     }),
     {}
   )
+}
+
+function capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
+module.exports = {
+  parseQueryString,
+  capitalize
 }

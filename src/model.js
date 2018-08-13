@@ -5,6 +5,11 @@ const Model = {
     id: { unique: true, indexed: true },
     created: { indexed: true }
     // ...rest
+  },
+  Content: {
+    id: { unique: true, indexed: true },
+    created: { indexed: true }
+    // ...rest
   }
 }
 

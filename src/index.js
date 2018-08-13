@@ -27,6 +27,10 @@ const endpoints = {
     '/user': {
       description: 'Add or update a User',
       call: require('./endpoint/post-user')
+    },
+    '/content': {
+      description: 'Add an Content linked to a User',
+      call: require('./endpoint/post-content')
     }
   }
 }

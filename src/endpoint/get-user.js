@@ -1,5 +1,5 @@
+const { parseQueryString } = require('../util')
 const { db } = require('../util/neo4j')
-const parseQueryString = require('../util/parseQueryString')
 
 module.exports = async req => {
   try {
