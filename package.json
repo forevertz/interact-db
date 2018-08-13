@@ -5,13 +5,14 @@
   "main": "src/index.js",
   "repository": "https://github.com/forevertz/interact-db",
   "author": "Improvertz",
-  "license": "GPLv3",
+  "license": "GPL-3.0",
   "scripts": {
     "dev": "docker-compose -f docker-compose.dev.yml up -d && micro-dev",
     "start": "NODE_ENV=${NODE_ENV-production} micro"
   },
   "dependencies": {
-    "micro": "^9.3.3"
+    "micro": "^9.3.3",
+    "neo4j-driver": "^1.6.3"
   },
   "devDependencies": {
     "eslint-config-standard": "^11.0.0",

@@ -1,6 +1,9 @@
 const { send } = require('micro')
 
+const { initModel } = require('./model')
+
 process.env.TZ = 'UTC'
+initModel()
 
 const endpoints = {
   GET: {
@@ -14,9 +17,18 @@ const endpoints = {
     '/time': {
       description: 'Get server time (ISO 8601)',
       call: require('./endpoint/get-time')
+    },
+    '/user': {
+      description: 'Get Users',
+      call: require('./endpoint/get-user')
     }
   },
-  POST: {}
+  POST: {
+    '/user': {
+      description: 'Add or update a User',
+      call: require('./endpoint/post-user')
+    }
+  }
 }
 
 async function checkRequest(request, response, endpoints) {
