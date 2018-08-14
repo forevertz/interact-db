@@ -3,12 +3,12 @@ const { json } = require('micro')
 const { db } = require('../util/neo4j')
 
 module.exports = async req => {
-  const { userId, toUserId, type, ...params } = await json(req, { encoding: 'utf8' })
+  const { userId, toUserId, toContentId, type, ...params } = await json(req, { encoding: 'utf8' })
   try {
     const commands = [
-      'MATCH (user1:User { id: $userId })',
-      'MATCH (user2:User { id: $toUserId })',
-      `CREATE (user1)-[interaction:${type.toUpperCase()} { created: timestamp() }]->(user2)`,
+      'MATCH (user:User { id: $userId })',
+      toUserId ? 'MATCH (to:User { id: $toUserId })' : 'MATCH (to:Content { id: $toContentId })',
+      `CREATE (user)-[interaction:${type.toUpperCase()} { created: timestamp() }]->(to)`,
       'SET interaction += $params'
     ]
     await db.run(commands.join(' '), { userId, toUserId, params })
