@@ -1,14 +1,22 @@
 const { json } = require('micro')
 
 const { db } = require('../util/neo4j')
+const { FormError, isString } = require('../util/validator')
+
+function validateParams({ id, ...params }) {
+  if (!id || !isString(id)) {
+    throw new FormError('Parameter `id` is required and should be a string')
+  }
+}
 
 module.exports = async req => {
-  const { id, ...params } = await json(req, { encoding: 'utf8' })
   try {
+    const { id, ...params } = await json(req, { encoding: 'utf8' })
+    validateParams({ id, ...params })
     const commands = [
-      'MERGE (a:User { id: $id })',
-      'ON CREATE SET a.created = timestamp()',
-      'SET a += $params'
+      'MERGE (user:User { id: $id })',
+      'ON CREATE SET user.created = timestamp()',
+      'SET user += $params'
     ]
     await db.run(commands.join(' '), { id, params })
     return { success: true }

@@ -1,15 +1,21 @@
 const { parseQueryString } = require('../util')
 const { db, returnData } = require('../util/neo4j')
+const { FormError } = require('../util/validator')
+
+function validateParams(params) {
+  if (Object.keys(params).filter(v => v).length === 0) {
+    throw new FormError('You must specify at least 1 parameter')
+  }
+}
 
 module.exports = async req => {
   try {
     const params = parseQueryString(req.url.split('?')[1] || '')
+    validateParams(params)
     const commands = [
       'MATCH (a:User)',
       `WHERE ${Object.keys(params)
-        .filter(v => v)
         .map(key => `a.${key} = $${key}`)
-        .concat('1=1')
         .join(' AND ')}`,
       'RETURN a',
       'LIMIT 1'
