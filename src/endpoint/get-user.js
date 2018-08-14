@@ -1,5 +1,5 @@
 const { parseQueryString } = require('../util')
-const { db } = require('../util/neo4j')
+const { db, returnData } = require('../util/neo4j')
 
 module.exports = async req => {
   try {
@@ -15,7 +15,7 @@ module.exports = async req => {
       'LIMIT 1'
     ]
     const { records } = await db.run(commands.join(' '), params)
-    return { success: true, result: records[0]._fields[0] }
+    return { success: true, result: returnData(records)[0] }
   } catch (error) {
     return { success: false, error: `[${error.code}] ${error.message}` }
   }

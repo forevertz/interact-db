@@ -27,8 +27,18 @@ async function addUniqueConstraint(label, property) {
   } catch (error) {}
 }
 
+function returnData(records) {
+  return records.map(({ _fields, _fieldLookup }) =>
+    Object.keys(_fieldLookup).reduce(
+      (acc, field, i) => ({ ...acc, [field]: i > 0 ? _fields[i] : _fields[i].properties }),
+      {}
+    )
+  )
+}
+
 module.exports = {
   db,
   addIndex,
-  addUniqueConstraint
+  addUniqueConstraint,
+  returnData
 }
