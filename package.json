@@ -8,7 +8,7 @@
   "license": "GPL-3.0",
   "scripts": {
     "dev": "docker-compose -f docker-compose.dev.yml up -d && micro-dev",
-    "start": "NODE_ENV=${NODE_ENV-production} micro"
+    "start": "NODE_ENV=${NODE_ENV-production} NEO4J_URL=$NEO4J_URL NEO4J_AUTH=$NEO4J_AUTH micro"
   },
   "dependencies": {
     "micro": "^9.3.3",

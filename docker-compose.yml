@@ -6,12 +6,18 @@ services:
     environment:
       - NEO4J_AUTH=${NEO4J_AUTH-neo4j/CHANGEME}
       - NEO4J_HOME=/var/lib/neo4j
+    ports:
+      - 127.0.0.1:7687:7687
+      - 127.0.0.1:3004:7474
     volumes:
       - dataVolume:/var/lib/neo4j/data
       - dataVolume:/var/lib/neo4j/logs
 
   interact-db:
     build: .
+    environment:
+      - NEO4J_URL=bolt://neo4j
+      - NEO4J_AUTH=${NEO4J_AUTH-neo4j/CHANGEME}
     ports:
       - 127.0.0.1:3003:3000
     links:
