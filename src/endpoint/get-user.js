@@ -13,15 +13,15 @@ module.exports = async req => {
     const params = parseQueryString(req.url.split('?')[1] || '')
     validateParams(params)
     const commands = [
-      'MATCH (a:User)',
+      'MATCH (user:User)',
       `WHERE ${Object.keys(params)
-        .map(key => `a.${key} = $${key}`)
+        .map(key => `user.${key} = $${key}`)
         .join(' AND ')}`,
-      'RETURN a',
+      'RETURN user',
       'LIMIT 1'
     ]
     const { records } = await db.run(commands.join(' '), params)
-    return { success: true, result: returnData(records)[0] }
+    return { success: true, result: returnData(records)[0] || null }
   } catch (error) {
     return { success: false, error: `[${error.code}] ${error.message}` }
   }

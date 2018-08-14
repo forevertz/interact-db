@@ -31,7 +31,7 @@ module.exports = async req => {
       `CREATE (user)-[interaction:${type.toUpperCase()} { created: timestamp() }]->(to)`,
       'SET interaction += $params'
     ]
-    await db.run(commands.join(' '), { userId, toUserId, params })
+    await db.run(commands.join(' '), { userId, toUserId, toContentId, params })
     return { success: true }
   } catch (error) {
     return { success: false, error: `[${error.code}] ${error.message}` }

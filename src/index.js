@@ -19,7 +19,7 @@ const endpoints = {
       call: require('./endpoint/get-time')
     },
     '/user': {
-      description: 'Get Users',
+      description: 'Get a User',
       call: require('./endpoint/get-user')
     }
   },
