@@ -32,6 +32,9 @@ const endpoints = {
       description: 'Add an Content linked to a User',
       call: require('./endpoint/post-content')
     },
+    '/comment': {
+      description: 'Add a Comment on a User or a Content',
+      call: require('./endpoint/post-comment')
     },
     '/interaction': {
       description: 'Add an Interaction between a User and another User or a Content',
