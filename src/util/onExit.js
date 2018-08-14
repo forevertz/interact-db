@@ -5,7 +5,9 @@ module.exports = function onExit(func) {
   const debouncedOnExit = (...args) => {
     if (!exited) {
       exited = true
-      SIGNALS.forEach(signal => process.off(signal, debouncedOnExit))
+      if (process.off) {
+        SIGNALS.forEach(signal => process.off(signal, debouncedOnExit))
+      }
       func(...args)
     }
   }
