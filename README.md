@@ -28,7 +28,7 @@ $ git clone https://github.com/forevertz/interact-db.git
 $ cd interact-db
 $ # Edit password in docker-compose.yml
 $ docker-compose up -d
-# Your API is now running locally on http://127.0.0.1:3003
+# Your API is now running locally on http://127.0.0.1:3000
 # Recommended: install a reverse proxy to handle authentification and authorizations
 ```
 
@@ -45,7 +45,7 @@ $ docker-compose up -d
 <details><summary>GET /user</summary><p>
 
 ```bash
-$ curl http://127.0.0.1:3003/user?id=my-user-id-1
+$ curl http://127.0.0.1:3000/user?id=my-user-id-1
 
 {
   "success": true,
@@ -74,13 +74,13 @@ $ curl http://127.0.0.1:3003/user?id=my-user-id-1
 $ curl --request POST \
        --header "Content-Type: application/json" \
        --data '{ "id": "my-user-id-1", "name": "Alice" }' \
-       http://127.0.0.1:3003/user
+       http://127.0.0.1:3000/user
 
 # Add Bob
 $ curl --request POST \
        --header "Content-Type: application/json" \
        --data '{ "id": "my-user-id-2", "name": "Bob" }' \
-       http://127.0.0.1:3003/user
+       http://127.0.0.1:3000/user
 ```
 
 </p></details>
@@ -92,7 +92,7 @@ $ curl --request POST \
 $ curl --request POST \
        --header "Content-Type: application/json" \
        --data '{ "userId": "my-user-id-1", "id": "my-content-id-1", "type": "Article", "action": "SHARED", "url": "http://...", "text": "my content" }' \
-       http://127.0.0.1:3003/content
+       http://127.0.0.1:3000/content
 ```
 
 </p></details>
@@ -104,19 +104,19 @@ $ curl --request POST \
 $ curl --request POST \
        --header "Content-Type: application/json" \
        --data '{ "userId": "my-user-id-2", "id": "my-content-id-2", "aboutContentId": "my-content-id-1", "text": "Useful content, thanks Alice!" }' \
-       http://127.0.0.1:3003/comment
+       http://127.0.0.1:3000/comment
 
 # Alice comments Bob's comment
 $ curl --request POST \
        --header "Content-Type: application/json" \
        --data '{ "userId": "my-user-id-1", "id": "my-content-id-3", "aboutContentId": "my-content-id-2", "text": "Glad it helps." }' \
-       http://127.0.0.1:3003/comment
+       http://127.0.0.1:3000/comment
 
 # Bob adds a comment about Alice
 $ curl --request POST \
        --header "Content-Type: application/json" \
        --data '{ "userId": "my-user-id-2", "id": "my-content-id-4", "aboutUserId": "my-user-id-1", "text": "Alice is great!" }' \
-       http://127.0.0.1:3003/comment
+       http://127.0.0.1:3000/comment
 ```
 
 </p></details>
@@ -128,13 +128,13 @@ $ curl --request POST \
 $ curl --request POST \
        --header "Content-Type: application/json" \
        --data '{ "userId": "my-user-id-2", "toContentId": "my-content-id-3", "type": "LIKED" }' \
-       http://127.0.0.1:3003/interaction
+       http://127.0.0.1:3000/interaction
 
 # Bob follows Alice
 $ curl --request POST \
        --header "Content-Type: application/json" \
        --data '{ "userId": "my-user-id-2", "toUserId": "my-user-id-1", "type": "FOLLOWED" }' \
-       http://127.0.0.1:3003/interaction
+       http://127.0.0.1:3000/interaction
 ```
 
 </p></details>
